@@ -24,3 +24,110 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Smooth scrolling performance optimizations */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize image rendering */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  will-change: transform;
+}
+
+/* Optimize animations */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* GPU acceleration for animated elements */
+[class*="animate"], 
+[class*="transition"],
+.process-circle,
+.group {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Contact form popup – animated check (success) and X (error) */
+.contact-popup-icon-wrap {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-popup-icon-wrap.success .contact-popup-circle {
+  stroke: #16a34a;
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: contact-popup-draw-circle 0.4s ease-out forwards;
+}
+.contact-popup-icon-wrap.success .contact-popup-check-path {
+  stroke: #16a34a;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: contact-popup-draw-check 0.35s ease-out 0.35s forwards;
+}
+.contact-popup-icon-wrap.error .contact-popup-circle {
+  stroke: #dc2626;
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: contact-popup-draw-circle 0.4s ease-out forwards;
+}
+.contact-popup-icon-wrap.error .contact-popup-x-path {
+  stroke: #dc2626;
+  stroke-dasharray: 68;
+  stroke-dashoffset: 68;
+  animation: contact-popup-draw-x 0.3s ease-out 0.35s forwards;
+}
+.contact-popup-check,
+.contact-popup-x {
+  width: 80px;
+  height: 80px;
+}
+.contact-popup-circle {
+  fill: none;
+}
+.contact-popup-check-path,
+.contact-popup-x-path {
+  fill: none;
+}
+@keyframes contact-popup-draw-circle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes contact-popup-draw-check {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes contact-popup-draw-x {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Popup overlay and box entrance */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translateZ(0) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0) scale(1);
+  }
+}
+
