@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
-import { BookOpen, Megaphone, Users, Star, Calendar } from 'lucide-react'
+import { Star, Calendar } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Header from './components/Header'
@@ -10,6 +10,7 @@ import Footer from './components/Footer'
 import TeamSection from './components/TeamSection'
 import ContactSection from './components/ContactSection'
 import CTASection from './components/CTASection'
+import CounterSection from './components/CounterSection'
 import PortfolioSection from './components/PortfolioSection'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -31,6 +32,7 @@ export default function Home() {
   const portfolioWrapRef = useRef<HTMLDivElement>(null)
   const aboutSectionRef = useRef<HTMLElement>(null)
   const aboutContentRef = useRef<HTMLDivElement>(null)
+  const counterWrapRef = useRef<HTMLDivElement>(null)
   const ctaWrapRef = useRef<HTMLDivElement>(null)
   const teamWrapRef = useRef<HTMLDivElement>(null)
   const reviewsSectionRef = useRef<HTMLElement>(null)
@@ -40,22 +42,16 @@ export default function Home() {
 
   const services = [
     {
-      icon: BookOpen,
       title: 'Publishing Services',
-      description: 'Transform your manuscript into a professionally published book with our comprehensive publishing solutions.',
-      image: '/services-1.jpeg'
+      description: 'It is a long established fact that a reader will be distracted by the readable content of a page when.It is a long established fact that a reader will be distracted by the readable content of a page when.'
     },
     {
-      icon: Megaphone,
       title: 'Business Marketing',
-      description: 'Elevate your brand with strategic marketing campaigns designed to reach your target audience effectively.',
-      image: '/services-2.jpeg'
+      description: 'It is a long established fact that a reader will be distracted by the readable content of a page when.It is a long established fact that a reader will be distracted by the readable content of a page when.'
     },
     {
-      icon: Users,
       title: 'Author Marketing',
-      description: 'Build your author platform and connect with readers through personalized marketing strategies.',
-      image: '/services-3.jpeg'
+      description: 'It is a long established fact that a reader will be distracted by the readable content of a page when.It is a long established fact that a reader will be distracted by the readable content of a page when.'
     }
   ]
 
@@ -293,6 +289,9 @@ export default function Home() {
           if (aboutContentRef.current) gsap.fromTo(aboutContentRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.15, scrollTrigger: { trigger: aboutSectionRef.current, start: 'top 80%', toggleActions: 'play none none reverse' } })
         }
 
+        // Counter
+        if (counterWrapRef.current) gsap.fromTo(counterWrapRef.current, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: counterWrapRef.current, ...stConfig } })
+
         // CTA
         if (ctaWrapRef.current) gsap.fromTo(ctaWrapRef.current, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: ctaWrapRef.current, ...stConfig } })
 
@@ -364,45 +363,28 @@ export default function Home() {
         </div>
       </section>
 
-      <section ref={servicesSectionRef} id="services" className="py-20 bg-gray-50 px-4 sm:px-6 lg:px-8">
+      <section ref={servicesSectionRef} id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-[#101828]">
         <div className="max-w-7xl mx-auto">
           <div ref={servicesHeaderRef} className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">Our Services</h2>
+            <p className="text-xl text-white max-w-2xl mx-auto">
               Comprehensive solutions tailored to bring your vision to life
             </p>
           </div>
 
-          <div ref={servicesGridRef} className="grid md:grid-cols-3 gap-8">
+          <div ref={servicesGridRef} className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {services.map((service, index) => (
-              <div 
-                key={index} 
-                className="group rounded-lg bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
+              <div
+                key={index}
+                className="service-glass-card group rounded-2xl bg-white border border-[#101828] shadow-sm p-6 lg:p-8 cursor-pointer"
               >
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    loading="lazy"
-                    unoptimized
-                  />
-                </div>
-                <div className="p-6">
-                  <service.icon className="w-12 h-12 mb-4 text-gray-900" />
-                  <h3 className="text-2xl font-bold mb-3 text-gray-900">{service.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{service.description}</p>
-                </div>
+                <h3 className="relative z-10 text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                <p className="relative z-10 text-base text-gray-600 leading-relaxed">{service.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      <div ref={portfolioWrapRef}>
-        <PortfolioSection />
-      </div>
 
       <section ref={aboutSectionRef} id="about" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -415,6 +397,14 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div ref={counterWrapRef}>
+        <CounterSection />
+      </div>
+
+      <div ref={portfolioWrapRef}>
+        <PortfolioSection />
+      </div>
 
       <div ref={ctaWrapRef}>
         <CTASection />
@@ -476,42 +466,40 @@ export default function Home() {
                       <div 
                         className="hidden md:block absolute pointer-events-none z-0"
                         style={{ 
-                          top: '48px', // Center of 96px circle (w-24 h-24 = 96px, center at 48px)
+                          top: '48px',
                           left: '220px',
                           width: '60%',
                           height: '80px',
-                          transform: 'translateY(-50%)' // Center vertically on the 48px point
+                          transform: 'translateY(-50%)'
                         }}
                       >
-                        <svg 
-                          width="100%" 
-                          height="80" 
-                          viewBox="0 0 200 80" 
-                          preserveAspectRatio="none"
-                          style={{ overflow: 'visible', minWidth: '60px' }}
-                        >
-                          {/* Perfectly centered curved path - both start and end at y=40 (center of 80px viewBox) */}
-                          <path 
-                            ref={(el) => {
-                              processArrowsRef.current[index] = el
-                            }}
-                            d="M 0 40 Q 100 15, 200 40" 
-                            stroke="#0f172a"
-                            strokeWidth="3.5" 
-                            fill="none" 
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          {/* Perfectly centered arrowhead - points to y=40 (center) */}
-                          <polygon 
-                            ref={(el) => {
-                              processArrowHeadsRef.current[index] = el
-                            }}
-                            points="185,33 200,40 185,47" 
-                            fill="#0f172a"
-                          />
-                        </svg>
-                      </div>
+                          <svg 
+                            width="100%" 
+                            height="80" 
+                            viewBox="0 0 200 80" 
+                            preserveAspectRatio="none"
+                            style={{ overflow: 'visible', minWidth: '60px' }}
+                          >
+                            <path 
+                              ref={(el) => {
+                                processArrowsRef.current[index] = el
+                              }}
+                              d="M 0 40 Q 100 15, 200 40" 
+                              stroke="#0f172a"
+                              strokeWidth="3.5" 
+                              fill="none" 
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <polygon 
+                              ref={(el) => {
+                                processArrowHeadsRef.current[index] = el
+                              }}
+                              points="185,33 200,40 185,47" 
+                              fill="#0f172a"
+                            />
+                          </svg>
+                        </div>
                       
                       {/* Mobile: Vertical curved arrow */}
                       <div 

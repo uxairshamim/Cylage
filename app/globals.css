@@ -8,8 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,7 +21,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Smooth scrolling performance optimizations */
@@ -112,6 +111,43 @@ img {
   to {
     stroke-dashoffset: 0;
   }
+}
+
+/* Services boxes - hover: dark bg, white text, zoom */
+.service-glass-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 500ms ease-out, box-shadow 500ms ease-out,
+    background-color 500ms ease-out, border-color 500ms ease-out;
+}
+.service-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -125%;
+  width: 60%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: skew(45deg);
+  transition: left 500ms ease-out, opacity 500ms ease-out;
+  pointer-events: none;
+}
+.service-glass-card h3,
+.service-glass-card p {
+  transition: color 500ms ease-out;
+}
+.service-glass-card:hover {
+  background-color: #1e2939;
+  border-color: #1e2939;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+.service-glass-card:hover h3,
+.service-glass-card:hover p {
+  color: white;
+}
+.service-glass-card:hover::before {
+  opacity: 0;
 }
 
 /* Popup overlay and box entrance */
