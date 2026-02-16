@@ -150,6 +150,15 @@ img {
   opacity: 0;
 }
 
+/* Hide scrollbar for process slider (mobile/tablet) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Popup overlay and box entrance */
 @keyframes fadeIn {
   to {

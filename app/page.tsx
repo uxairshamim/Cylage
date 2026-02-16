@@ -74,6 +74,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!processSectionRef.current || processCirclesRef.current.length === 0) return
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return // Skip GSAP on mobile/tablet (slider view)
 
     const circles = processCirclesRef.current.filter(Boolean) as HTMLDivElement[]
     const boxes = processBoxesRef.current.filter(Boolean) as HTMLDivElement[]
@@ -430,7 +431,38 @@ export default function Home() {
           </div>
 
           <div className="relative mb-12">
-            <div className="grid md:grid-cols-4 gap-4 lg:gap-8 relative items-stretch">
+            {/* Mobile & Tablet: Slider */}
+            <div className="lg:hidden overflow-x-auto snap-x snap-mandatory -mx-4 px-4 sm:-mx-6 sm:px-6 pb-4 scrollbar-hide">
+              <div className="flex gap-4 min-w-min">
+                {process.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex-shrink-0 w-[85vw] sm:w-[75vw] max-w-[340px] snap-center"
+                  >
+                    <div className="text-center flex flex-col h-full">
+                      <div className="relative inline-block mb-4" style={{ margin: '0 auto' }}>
+                        <div
+                          className="process-circle relative w-24 h-24 bg-gray-900 text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg"
+                          style={{ backgroundColor: '#0f172a' }}
+                        >
+                          <span className="relative z-10">{item.step}</span>
+                        </div>
+                      </div>
+                      <div
+                        className="rounded-xl p-4 shadow-md flex-1 flex flex-col min-h-[140px]"
+                        style={{ backgroundColor: '#1e293b', marginTop: '12px' }}
+                      >
+                        <h4 className="text-lg font-bold text-white mb-2">{item.title}</h4>
+                        <p className="text-slate-200 text-sm leading-relaxed flex-1">{item.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop: Grid */}
+            <div className="hidden lg:grid lg:grid-cols-4 gap-4 lg:gap-8 relative items-stretch">
               {process.map((item, index) => (
                 <div key={index} className="relative z-10 flex flex-col h-full">
                   <div className="text-center flex flex-col h-full">
@@ -469,7 +501,7 @@ export default function Home() {
                       {/* Desktop: Horizontal curved arrow (no vertical arrow between row 1 and 2) */}
                       {index !== 3 && (
                         <div 
-                          className="hidden md:block absolute pointer-events-none z-0"
+                          className="hidden lg:block absolute pointer-events-none z-0"
                           style={{ 
                             top: '48px',
                             left: '55%',
@@ -510,7 +542,7 @@ export default function Home() {
                       {/* Mobile: Vertical curved arrow (hidden between step 4 and 5) */}
                       {index !== 3 && (
                       <div 
-                        className="md:hidden absolute top-full left-1/2 pointer-events-none z-0"
+                        className="lg:hidden absolute top-full left-1/2 pointer-events-none z-0"
                         style={{ 
                           height: '4rem',
                           width: '48px',
