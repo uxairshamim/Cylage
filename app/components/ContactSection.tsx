@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { MapPin } from 'lucide-react'
+import { MapPin, Mail, Phone, Clock } from 'lucide-react'
 
 const SUCCESS_MESSAGE = "Thank you! Your message has been sent. We'll get back to you soon."
 const ERROR_FALLBACK = 'Failed to send message. Please try again later.'
@@ -66,12 +66,12 @@ export default function ContactSection() {
               team will get back to you within 24 hours.
             </p>
 
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <MapPin className="w-6 h-6 text-gray-900 mr-4 mt-1 flex-shrink-0" />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex items-start p-4 rounded-lg bg-white shadow-sm">
+                <MapPin className="w-6 h-6 text-gray-900 mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-bold text-gray-900 mb-2">Our Location</h4>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-sm">
                     123 Publishing Avenue
                     <br />
                     New York, NY 10001
@@ -80,20 +80,45 @@ export default function ContactSection() {
                   </p>
                 </div>
               </div>
-            </div>
-
-            <div className="mt-8 rounded-xl overflow-hidden shadow-lg border border-gray-200 h-64 sm:h-72 lg:h-80">
-              <iframe
-                src="https://www.google.com/maps?q=123+Publishing+Avenue+New+York+NY+10001&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Cylage office location"
-                className="w-full h-full min-h-[256px]"
-              />
+              <div className="flex items-start p-4 rounded-lg bg-white shadow-sm">
+                <MapPin className="w-6 h-6 text-gray-900 mr-3 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">Our Location</h4>
+                  <p className="text-gray-600 text-sm">
+                    123 Publishing Avenue
+                    <br />
+                    New York, NY 10001
+                    <br />
+                    United States
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start p-4 rounded-lg bg-white shadow-sm">
+                <MapPin className="w-6 h-6 text-gray-900 mr-3 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">Our Location</h4>
+                  <p className="text-gray-600 text-sm">
+                    123 Publishing Avenue
+                    <br />
+                    New York, NY 10001
+                    <br />
+                    United States
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start p-4 rounded-lg bg-white shadow-sm">
+                <MapPin className="w-6 h-6 text-gray-900 mr-3 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">Our Location</h4>
+                  <p className="text-gray-600 text-sm">
+                    123 Publishing Avenue
+                    <br />
+                    New York, NY 10001
+                    <br />
+                    United States
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -59,7 +59,11 @@ export default function Home() {
     { step: '01', title: 'Consultation', description: 'We discuss your goals and vision' },
     { step: '02', title: 'Strategy', description: 'Custom plan tailored to your needs' },
     { step: '03', title: 'Execution', description: 'Professional implementation' },
-    { step: '04', title: 'Launch', description: 'Your success story begins' }
+    { step: '04', title: 'Review', description: 'We refine and perfect every detail' },
+    { step: '05', title: 'Feedback', description: 'Your input shapes the final result' },
+    { step: '06', title: 'Refinement', description: 'Final tweaks based on your feedback' },
+    { step: '07', title: 'Launch', description: 'Your success story begins' },
+    { step: '08', title: 'Support', description: 'Ongoing support for your success' }
   ]
 
   const reviews = [
@@ -430,7 +434,7 @@ export default function Home() {
               {process.map((item, index) => (
                 <div key={index} className="relative z-10 flex flex-col h-full">
                   <div className="text-center flex flex-col h-full">
-                    <div className="relative inline-block mb-6" style={{ margin: '0 auto' }}>
+                    <div className="relative inline-block mb-4" style={{ margin: '0 auto' }}>
                       {/* Step Circle - 96px (w-24 h-24) */}
                       <div 
                         ref={(el) => {
@@ -451,28 +455,29 @@ export default function Home() {
                       ref={(el) => {
                         processBoxesRef.current[index] = el
                       }}
-                      className="rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 flex-1 flex flex-col"
-                      style={{ backgroundColor: '#1e293b', marginTop: '20px' }}
+                      className="rounded-xl p-4 lg:p-5 shadow-md hover:shadow-lg transition-shadow duration-300 flex-1 flex flex-col"
+                      style={{ backgroundColor: '#1e293b', marginTop: '12px' }}
                     >
-                      <h4 className="text-xl font-bold text-white mb-2">{item.title}</h4>
-                      <p className="text-slate-200 leading-relaxed flex-1">{item.description}</p>
+                      <h4 className="text-lg lg:text-xl font-bold text-white mb-1 lg:mb-2">{item.title}</h4>
+                      <p className="text-slate-200 text-sm lg:text-base leading-relaxed flex-1">{item.description}</p>
                     </div>
                   </div>
                   
                   {/* Curved Arrow Connectors */}
                   {index < process.length - 1 && (
                     <>
-                      {/* Desktop: Perfectly aligned curved arrow */}
-                      <div 
-                        className="hidden md:block absolute pointer-events-none z-0"
-                        style={{ 
-                          top: '48px',
-                          left: '220px',
-                          width: '60%',
-                          height: '80px',
-                          transform: 'translateY(-50%)'
-                        }}
-                      >
+                      {/* Desktop: Horizontal curved arrow (no vertical arrow between row 1 and 2) */}
+                      {index !== 3 && (
+                        <div 
+                          className="hidden md:block absolute pointer-events-none z-0"
+                          style={{ 
+                            top: '48px',
+                            left: '55%',
+                            width: '90%',
+                            height: '80px',
+                            transform: 'translateY(-50%)'
+                          }}
+                        >
                           <svg 
                             width="100%" 
                             height="80" 
@@ -500,8 +505,10 @@ export default function Home() {
                             />
                           </svg>
                         </div>
+                      )}
                       
-                      {/* Mobile: Vertical curved arrow */}
+                      {/* Mobile: Vertical curved arrow (hidden between step 4 and 5) */}
+                      {index !== 3 && (
                       <div 
                         className="md:hidden absolute top-full left-1/2 pointer-events-none z-0"
                         style={{ 
@@ -546,6 +553,7 @@ export default function Home() {
                           />
                         </svg>
                       </div>
+                      )}
                     </>
                   )}
                 </div>
